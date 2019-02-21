@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <link rel="stylesheet" href="css/styles.css">
+
+    <script src="js/scripts.js"></script>
+    <title>Calculator</title>
+</head>
+<body>
+<script>
+    function numberButton(value, name) {
+        button = document.getElementById(name);
+        inputD = document.getElementById("input");
+        inputD.value = inputD.value.concat(value);
+    }
+
+    function operators(value, name) {
+        button = document.getElementById(name);
+        inputD = document.getElementById("input");
+        inputValue = inputD.value;
+        lastValue = inputValue.slice(-1);
+
+        if (value !== "=" && (lastValue !== ("/") && lastValue !== ("*") && lastValue !== ("-") && lastValue !== (".") && lastValue !== ("="))) {
+            inputD.value = inputD.value.concat(value);
+        } else {
+            inputD.value = eval(inputD.value);
+        }
+    }
+
+    function additional(name) {
+        console.log(name);
+        button = document.getElementById(name);
+        inputD = document.getElementById("input");
+        inputValue = inputD.value;
+        lastValue = inputValue.slice(-1);
+        if (name === "all_cancel") {
+            inputD.value = "";
+        }
+        if (name === "clear") {
+            inputD.value = inputD.value.substring(0, inputD.value.length - 1);
+        }
+        if (name === 'off') {
+            buttonOn = document.getElementById("on");
+            inputD.className = "inputOff";
+            buttonOn.classList.remove("buttonOn");
+            buttonOn.className = "button button5";
+            button.className = "buttonOff";
+        }
+        if (name === 'on') {
+            buttonOff = document.getElementById("off");
+            inputD.className = "inputDisplay";
+            buttonOff.classList.remove("buttonOff");
+            buttonOff.className = "button button3";
+            button.className = "buttonOn";
+            inputD.value = "";
+        }
+    }
+</script>
+
+<div>
+    <div>
+        <input type="text" class="inputDisplay" id="input"/>
+    </div>
+    <div>
+        <button class="button button5" id="on" onclick="additional('on')">ON</button>
+        <button class="button button3" id="off" onclick="additional('off')">OFF</button>
+        <button class="button button4" id="all_cancel" onclick="additional('all_cancel')">AC</button>
+        <button class="button button4" id="clear" onclick="additional('clear')">C</button>
+    </div>
+    <div>
+        <button class="button button2" id="seven" onclick="numberButton(7,seven)">7</button>
+        <button class="button button2" id="eight" onclick="numberButton(8,eight)">8</button>
+        <button class="button button2" id="nine" onclick="numberButton(9,nine)">9</button>
+        <button class="button button3" id="minus" onclick="operators('-', minus)">-</button>
+    </div>
+    <div>
+        <button class="button button2" id="four" onclick="numberButton(4,four)">4</button>
+        <button class="button button2" id="five" onclick="numberButton(5,five)">5</button>
+        <button class="button button2" id="six" onclick="numberButton(6,six)">6</button>
+        <button class="button button3" id="multiplication" onclick="operators('*',multiplication)">*</button>
+    </div>
+    <div>
+        <button class="button button2" id="one" onclick="numberButton(1,one)">1</button>
+        <button class="button button2" id="two" onclick="numberButton(2,two)">2</button>
+        <button class="button button2" id="three" onclick="numberButton(3,three)">3</button>
+        <button class="button button3" id="diff" onclick="operators('/',diff)">/</button>
+    </div>
+    <div>
+        <button class="button button4" id="point" onclick="operators('.',point)">.</button>
+        <button class="button button2" id="zero" onclick="numberButton(0,zero)">0</button>
+        <button class="button button5" id="equal" onclick="operators('=',equal)">=</button>
+        <button class="button button3" id="plus" onclick="operators('+',plus)">+</button>
+    </div>
+</div>
+
+</body>
+</html>
